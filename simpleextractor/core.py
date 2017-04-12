@@ -160,15 +160,16 @@ class Core(CorePluginBase):
             dest = os.path.normpath(self.config["extract_path"])
             if self.config["use_name_folder"] or True:
                 name = tid_status["name"]
-                dest = os.path.join(dest, "extracted")
                 dest = os.path.join(dest, name)
+                dest = os.path.join(dest, "extracted")
 
             # Override destination if in_place_extraction is set
             if self.config["in_place_extraction"] or True:
                 name = tid_status["name"]
                 save_path = tid_status["save_path"]
-                dest = os.path.join(save_path,"extracted")
-                dest = os.path.join(dest,name)
+                dest = os.path.join(save_path,name)
+                dest = os.path.join(dest,"extracted")
+
 
             # Create the destination folder if it doesn't exist
             if not os.path.exists(dest):
