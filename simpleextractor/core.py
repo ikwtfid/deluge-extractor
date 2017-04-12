@@ -138,15 +138,13 @@ class Core(CorePluginBase):
         tid_status = tid.get_status(["save_path", "name"])
 
         files = tid.get_files()
+	abs_root = os.path.abspath(tid_status["save_path"])
+        if "complete/movies" in abs_root:
+            log.info("Simple Extractor Skipping: %s", abs_root)
+            return
+
         for f in files:
             file_root, file_ext = os.path.splitext(f["path"])
-            abs_root = os.path.abspath(file_root)
-            if abs_root.startswith("/data/complete/movies"):
-                continue
-            if abs_root.startswith("/media/deluge/complete/movies"):
-                continue
-            if "/complete/movies" in abs_root:
-                continue
             file_ext_sec = os.path.splitext(file_root)[1]
             if file_ext_sec and file_ext_sec + file_ext in EXTRACT_COMMANDS:
                 file_ext = file_ext_sec + file_ext
