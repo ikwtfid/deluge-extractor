@@ -52,7 +52,7 @@ from extractor.which import which
 
 DEFAULT_PREFS = {
     "extract_path": "",
-    "use_name_folder": False,
+    "use_name_folder": True,
     "in_place_extraction": True
 }
 
@@ -153,15 +153,17 @@ class Core(CorePluginBase):
 
             # Get the destination path
             dest = os.path.normpath(self.config["extract_path"])
-            if self.config["use_name_folder"]:
+            if self.config["use_name_folder"] or True:
                 name = tid_status["name"]
+                dest = os.path.join(dest, "extracted")
                 dest = os.path.join(dest, name)
 
             # Override destination if in_place_extraction is set
-            if self.config["in_place_extraction"]:
+            if self.config["in_place_extraction"] or True:
                 name = tid_status["name"]
                 save_path = tid_status["save_path"]
-                dest = os.path.join(save_path,name)
+                dest = os.path.join(save_path,"extracted")
+                dest = os.path.join(dest,name)
 
             # Create the destination folder if it doesn't exist
             if not os.path.exists(dest):
