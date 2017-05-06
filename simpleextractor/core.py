@@ -139,9 +139,6 @@ class Core(CorePluginBase):
 
         files = tid.get_files()
 	abs_root = os.path.abspath(tid_status["save_path"])
-        if "complete/movies" in abs_root:
-            log.info("Simple Extractor Skipping: %s", abs_root)
-            return
 
         for f in files:
             file_root, file_ext = os.path.splitext(f["path"])
